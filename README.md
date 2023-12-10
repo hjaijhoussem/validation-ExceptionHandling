@@ -1,6 +1,6 @@
 # Input validation
 
-Dependncie :
+Dependencie :
 
 ```
     <dependency>
