@@ -55,7 +55,7 @@ public class ErrorResponse {
     public ErrorResponse(String message) {this.message = message;}
 }
 ```
-## Create error enum 
+## 2. Create error enum 
 ```
 @AllArgsConstructor
 @Getter
@@ -67,7 +67,7 @@ public enum ErrorEnum {
 }
 ```
 
-## 2. Create Custom Exception class
+## 3. Create Custom Exception class
 
 ```
 @NoArgsConstructor
@@ -76,7 +76,7 @@ public class EmailAlreadyExistException extends RuntimeException{
 }
 ```
 
-## 3. Create Global Exception Handler Class
+## 4. Create Global Exception Handler Class
 
 ```
 @RestControllerAdvice
