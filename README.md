@@ -88,7 +88,7 @@ public class GlobalExceptionHandler {
         return new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage());
     }
 
-    //return error if one of the inputs not valid
+    //this handler for invalid inputs
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class )
     @ResponseStatus(HttpStatus.BAD_REQUEST)
