@@ -55,17 +55,28 @@ public class ErrorResponse {
     public ErrorResponse(String message) {this.message = message;}
 }
 ```
+## 2. Create error enum 
+```
+@AllArgsConstructor
+@Getter
+public enum ErrorEnum {
+    USER_NOT_FOUND("User not found"),
+    EMAIL_EXIST("Email already exist");
+    private final String message;
 
-## 2. Create Custom Exception class
+}
+```
+
+## 3. Create Custom Exception class
 
 ```
 @NoArgsConstructor
 public class EmailAlreadyExistException extends RuntimeException{
-    public EmailAlreadyExistException(String message){super(message);}
+    public EmailAlreadyExistException(ErrorEnum errorEnum) {super(errorEnum.getMessage());}
 }
 ```
 
-## 3. Create Global Exception Handler Class
+## 4. Create Global Exception Handler Class
 
 ```
 @RestControllerAdvice
@@ -104,14 +115,9 @@ public class UserService {
 
     public User addUser(UserDto userDto){
         userDao.findByEmail(userDto.getEmail()).ifPresent(existingUser -> {
-            throw new EmailAlreadyExistException("Email: '" + existingUser.getEmail() + "' already exists!");
+            throw new EmailAlreadyExistException(ErrorEnum.EMAIL_EXIST);
         });
         return userDao.save(mapper.map(userDto, User.class));
-    }
-
-    public User getUserById(Long id) {
-        return userDao.findById(id)
-                .orElseThrow(() -> new NoSuchCustomerExistsException("No Such Customer exists!!"));
     }
 }
 ```
