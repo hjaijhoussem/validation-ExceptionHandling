@@ -2,6 +2,7 @@
 ```
         springboot : 3.2.0
         jdk : 17
+        maven: 4.0.0
 ```
 
 # Input validation
