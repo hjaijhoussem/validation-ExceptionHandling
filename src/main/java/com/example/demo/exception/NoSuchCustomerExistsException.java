@@ -4,5 +4,6 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class NoSuchCustomerExistsException extends RuntimeException{
-    public NoSuchCustomerExistsException(String msg) {super(msg);}
+    public NoSuchCustomerExistsException(ErrorEnum errorEnum) {super(errorEnum.getMessage());}
+
 }

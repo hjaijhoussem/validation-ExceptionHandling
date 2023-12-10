@@ -4,6 +4,7 @@ import com.example.demo.dao.UserRepository;
 import com.example.demo.dto.UserDto;
 import com.example.demo.entity.User;
 import com.example.demo.exception.EmailAlreadyExistException;
+import com.example.demo.exception.ErrorEnum;
 import com.example.demo.exception.NoSuchCustomerExistsException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -17,13 +18,13 @@ public class UserService {
     private final ModelMapper mapper;
     public User addUser(UserDto userDto){
         userDao.findByEmail(userDto.getEmail()).ifPresent(existingUser -> {
-            throw new EmailAlreadyExistException("Email: '" + existingUser.getEmail() + "' already exists!");
+            throw new EmailAlreadyExistException(ErrorEnum.EMAIL_EXIST);
         });
         return userDao.save(mapper.map(userDto, User.class));
     }
 
     public User getUserById(Long id) {
         return userDao.findById(id)
-                .orElseThrow(() -> new NoSuchCustomerExistsException("No Such Customer exists!!"));
+                .orElseThrow(() -> new NoSuchCustomerExistsException(ErrorEnum.USER_NOT_FOUND));
     }
 }
