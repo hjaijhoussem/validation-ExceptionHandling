@@ -1,3 +1,9 @@
+# Versions :
+```
+        springboot : 3.2.0
+        jdk : 17
+```
+
 # Input validation
 
 Dependencie :
